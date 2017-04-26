@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS五子棋小游戏</title>
+  <style>
+     body{background:#000;}
+     #titBar{position:absolute;left:32%;top:1%;margin-left:-250px;z-index:2;margin:0 auto;width:500px;clear:both;height:50px;line-height:50px;color:#0f0;border:1px solid #0f0;text-align:center;box-shadow:0 0 80px #0f0;background:rgba(0,255,0,.4);}
+     #titBar span{font-size:30px;}
+     #chessBox{position:absolute;left:32%;top:10%;z-index:2;padding-top:22px;margin:0 auto;width:500px;height:500px;background:url(images/chess_bg.jpg) no-repeat center center;background-size:100%;}
+     #chessBoard{margin-left:12px;border-collapse:collapse;}
+     #chessBoard td{width:22px;height:22px;border:1px solid transparent;background-size:100%;}
+  </style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="titBar">
+  <span id="timeBox"></span>
+</div>
+<div id="chessBox">
+  <table id="chessBoard">
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td>
+      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+  </table>
+</div>
+<script>
+
+//JS事件委托
+window.onload=function(){
+  var oChess = document.getElementById('chessBoard');
+  oChess.addEventListener('click',function(ev){
+    if(ev.target.style.background.indexOf('images') >= 0){
+      alert('此处已落棋子！');
+      return false;
+    };
+    xia.call(ev.target);
+  },false);
+
+  var tds = document.getElementsByTagName('td');
+  var iswin = false;  //有没有分出胜负
+
+  //负责下棋
+  var xia = function(){
+    var color = cnt();
+    if(iswin){
+      alert('下次再玩！刷新页面，开始下一轮！');
+      return;
+    };
+
+    this.style.background='url(images/'+color+'.png) no-repeat center';
+    this.style.backgroundSize='100%';
+    judge.call(this,color);  //落子后判断胜负
+  };
+
+  //判断胜负
+  var judge = function(color){
+    //先找到当前下的这颗棋的坐标(td在tr中的索引，即是横坐标;tr在table中的索引，即是纵坐标)
+    var curr = {x:this.cellIndex,y:this.parentElement.rowIndex,color:color};
+    var line = ['','','',''];  //分别放置横、竖、左下斜、右下斜等方向的棋
+    //循环所有的单元格
+    for(var i=0,tmp={};i<361;i++){
+      //取当前循环到的这颗棋的坐标
+      tmp = {x:tds[i].cellIndex,y:tds[i].parentElement.rowIndex,color:'0'};
+
+      //取当前循环到的这颗棋的颜色，分别 b(black) w(white) 0(空) 来表示
+      if(tds[i].style.background.indexOf('black') >= 0){
+        tmp.color='b';
+      }else if(tds[i].style.background.indexOf('white') >= 0){
+        tmp.color='w';
+      };
+
+      if(curr.y == tmp.y){  //在一条横线上
+        line[0] += tmp.color;
+      };
+      if(curr.x == tmp.x){  //在一条竖线上
+        line[1] += tmp.color;
+      };
+      if((curr.x+curr.y) == (tmp.x+tmp.y)){  //在左下斜线上
+        line[2] += tmp.color;
+      };
+      if((curr.x-tmp.x) == (curr.y-tmp.y)){  //在右下斜线上
+        line[3] += tmp.color;
+      };
+    };
+
+    //判断4条线上，有没有连续的5个w或4个b
+    color = color == 'black'? 'bbbbb':'wwwww';  //赢家的颜色
+    for(var i=0;i<4;i++){
+      if(line[i].indexOf(color) >= 0){
+        //赢了
+        if(color=='bbbbb'){
+          alert('黑棋胜！');
+        }else if(color=='wwwww'){
+          alert('白棋胜！');
+        };
+        iswin = true;  //已分出胜负
+        break;
+      };
+    };
+  };
+};
+
+//闭包计棋器
+var cnt = (function(){
+  var curr = 'black';
+  return function(){
+    var tmp=curr;
+    if(curr=='black'){
+      curr='white';
+    }else{
+      curr='black';
+    };
+    return tmp;
+  };
+})();
+
+//展示当前时间
+(function(){
+  var aWeek = ['日','一','二','三','四','五','六'];
+  function showTime(){
+    var mytime = new Date();
+    var year = mytime.getFullYear();
+    var month = mytime.getMonth();
+    var day = mytime.getDate();
+    var week = mytime.getDay();
+    var hour = mytime.getHours();
+    var minute = mytime.getMinutes();
+    var second = mytime.getSeconds();
+
+    var timeinfo = year+'-'+(month+1)+'-'+day+' '+'星期'+aWeek[week]+' '+hour+':'+minute+':'+second;
+    var result = document.getElementById('timeBox');
+    result.innerHTML=timeinfo;
+  };
+  showTime();
+  setInterval(showTime,1000);
+})();
+
+//文字雨黑客帝国特效
+(function(){
+  var c=document.getElementById("c");
+  var ctx=c.getContext("2d");
+  c.width=window.innerWidth;
+  c.height=window.innerHeight;
+  //ctx.fillRect(0,0,100,100);
+  //a,b,c,d分别代表x方向偏移,y方向偏移,宽，高
+  var string1 = "abcdefghijklmnopqrstuvwxyz栗康敲代码";
+  string1.split("");
+  var fontsize=20;
+  columns=c.width/fontsize;
+  var drop = [];
+  for(var x=0;x<columns;x++){
+    drop[x]=0;
+  }
+  function drap(){
+    ctx.fillStyle="rgba(0,0,0,0.07)";
+    ctx.fillRect(0,0,c.width,c.height);
+    ctx.fillStyle="#0f0";
+    ctx.font=fontsize+"px arial";
+    for(var i=0;i<drop.length;i++){
+      var text1=string1[Math.floor(Math.random()*string1.length)];
+      ctx.fillText(text1,i*fontsize,drop[i]*fontsize);
+      drop[i]++;
+      if(drop[i]*fontsize>c.height&&Math.random()>0.9){//90%的几率掉落
+        drop[i]=0;
+      }
+    }
+  }
+  drap();
+  setInterval(drap,20);
+})();
+
+</script>
+</body>
+</html>
